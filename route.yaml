@@ -1,12 +1,10 @@
-apiVersion: route.openshift.io/v1
-kind: Route
+apiVersion: v1
+kind: Service
 metadata:
-  name: nginx-route
+  name: nginx-web
 spec:
-  to:
-    kind: Service
-    name: nginx-service
-  port:
-    targetPort: 80
-  tls:
-    termination: edge
+  selector:
+    app: nginx-web
+  ports:
+    - port: 80
+      targetPort: 80
