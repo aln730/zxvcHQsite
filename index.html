@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>zxcvWeb</title>
   <style>
     @font-face {
       font-family: 'DejaVu Sans Mono';
       src: url('DejaVuSansMono.ttf') format('truetype');
     }
-  
+
     body {
       margin: 0;
       padding: 20px;
@@ -18,12 +18,11 @@
       font-size: 14px;
       white-space: pre;
     }
-  
+
     #lamo a {
-      color: #2b63dd;
-      text-decoration: none;
-    }
-  
+  color: #2b63dd;
+  text-decoration: none;
+}
     /* Donut terminal */
     #donut-container {
       position: fixed;
@@ -32,9 +31,8 @@
       background: black;
       border: 1px solid #1bff00;
       padding: 5px;
-      z-index: 30;
+      z-index: 30; /* Increased z-index to make sure it's above the blog section */
       width: 340px;
-      max-width: 90%;
       height: 300px;
       font-family: monospace;
       color: #1bff00;
@@ -42,7 +40,7 @@
       display: flex;
       flex-direction: column;
     }
-  
+
     #donut-titlebar {
       background: #001100;
       padding: 3px 0;
@@ -50,7 +48,7 @@
       font-weight: bold;
       border-bottom: 1px solid #1bff00;
     }
-  
+
     #donut {
       margin: 0;
       white-space: pre;
@@ -64,7 +62,7 @@
       font-size: 10px;
       overflow: hidden;
     }
-  
+
     #donut-container a {
       color: #1bff00;
       text-decoration: none;
@@ -75,114 +73,64 @@
       transform: translateX(-50%);
       z-index: 10;
     }
-  
-    /* Blog Section (Top Right Corner) */
-    #blog-section {
-      position: fixed;
-      top: 30px;
-      right: 30px;
-      background-color: #000;
-      border: 1px solid #1bff00;
-      padding: 10px;
-      width: 350px;
-      max-width: 90%;
-      font-family: 'DejaVu Sans Mono', monospace;
-      font-size: 16px;
-      color: #1bff00;
-      z-index: 25;
-      box-shadow: 0 4px 10px rgba(0, 255, 0, 0.3);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    #blog-section div {
-      font-weight: bold;
-      text-align: center;
-      border-bottom: 1px solid #1bff00;
-      padding-bottom: 5px;
-      margin-bottom: 5px;
-    }
-  
-    #blog-section ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-  
-    #blog-section ul li a {
-      color: #1bff00;
-      text-decoration: none;
-      display: block;
-      padding: 5px 0;
-      font-size: 14px;
-      transition: background-color 0.3s ease;
-    }
-  
-    #blog-section ul li a:hover {
-      background-color: #1bff00;
-      color: #000;
-    }
-  
-    #axo a {
-      color: #1bff00;
-      text-decoration: none;
-    }
-  
-    #shitpost a {
-      color: #0830e2;
-      text-decoration: none;
-    }
-  
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      body {
-        padding: 10px;
-        font-size: 12px;
-      }
-  
-      #donut-container,
-      #blog-section {
-        position: static;
-        width: 100%;
-        height: auto;
-        margin-bottom: 20px;
-        box-sizing: border-box;
-      }
-  
-      #donut-container {
-        font-size: 8px;
-        height: 220px;
-      }
-  
-      #donut {
-        font-size: 8px;
-        line-height: 1;
-      }
-  
-      #blog-section {
-        font-size: 14px;
-      }
-  
-      #blog-section ul li a {
-        font-size: 12px;
-      }
-  
-      #donut-container a {
-        font-size: 10px;
-        bottom: 5px;
-      }
-    }
-  
-    @media (orientation: portrait) {
-      #donut-container,
-      #blog-section {
-        width: 90%;
-        margin: 10px auto;
-      }
-    }
+
+  /* Blog Section (Top Right Corner) */
+  #blog-section {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  background-color: #000;
+  border: 1px solid #1bff00;
+  padding: 10px;
+  width: 350px;
+  font-family: 'DejaVu Sans Mono', monospace;
+  font-size: 16px;
+  color: #1bff00;
+  z-index: 25;
+  box-shadow: 0 4px 10px rgba(0, 255, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#blog-section div {
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid #1bff00;
+  padding-bottom: 5px;
+  margin-bottom: 5px; /* Reduced margin to eliminate excess space */
+}
+
+#blog-section ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#blog-section ul li a {
+  color: #1bff00;
+  text-decoration: none;
+  display: block;
+  padding: 5px 0;
+  font-size: 14px; /* Reduced font size for better readability */
+  transition: background-color 0.3s ease;
+}
+
+#blog-section ul li a:hover {
+  background-color: #1bff00;
+  color: #000;
+}
+
+#axo a {
+  color: #1bff00;
+  text-decoration: none;
+}
+#shitpost a {
+  color: #0830e2;
+  text-decoration: none;
+}
+
   </style>
-  
 </head>
 <body>
 <h1>You've arrived. Welcome to zxcvHQ's official website.</h1>
@@ -325,12 +273,12 @@ Favourite Sofware:
 <div id="blog-section">
 <h1>Blogs</h1>
   <ul>
-    <li><a href="blog1.html">>Surviving on less than 4 hours of sleep 
- per night for two weeks</a></li>
+    <li><a href="blog1.html">>Bageling for the First Time</a></li>
     <li><a href="blog2.html">>LAN Party at 3 AM</a></li>
     <li><a href="blog3.html">>Golang Appreciation Post</a></li>
     <li><a href="blog4.html">>Why I love fucking around n finding out?</a></li>
-    <li><a href="blog5.html">>Bageling for the first time</a></li>
+    <li><a href="blog5.html">>Surviving on less than 4 hours of average 
+ sleep for 2 weeks</a></li>
   </ul>
 </div>
 
