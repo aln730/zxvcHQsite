@@ -1,19 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-site
+  name: nginx-web
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx-site
+      app: nginx-web
   template:
     metadata:
       labels:
-        app: nginx-site
+        app: nginx-web
     spec:
       containers:
         - name: nginx
-          image: yourusername/my-nginx-site
+          image: nginx:alpine
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: web-content
+              mountPath: /usr/share/nginx/html
+              readOnly: true
+      volumes:
+        - name: web-content
+          configMap:
+            name: nginx-web-content
