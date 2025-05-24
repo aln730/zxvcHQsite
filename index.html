@@ -8,7 +8,7 @@
         font-family: 'DejaVu Sans Mono';
         src: url('DejaVuSansMono.ttf') format('truetype');
       }
-
+  
       body {
         margin: 0;
         padding: 20px;
@@ -18,29 +18,100 @@
         font-size: 14px;
         white-space: pre;
       }
-
+  
       #lamo a {
-    color: #2b63dd;
-    text-decoration: none;
-  }
-      /* Donut terminal */
-      #donut-container {
+        color: #2b63dd;
+        text-decoration: none;
+      }
+  
+      #right-sidebar {
         position: fixed;
-        bottom: 50px;
+        top: 30px;
         right: 30px;
-        background: black;
-        border: 1px solid #0ff000 ;
-        padding: 5px;
-        z-index: 30; /* Increased z-index to make sure it's above the blog section */
-        width: 340px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+        z-index: 50;
+      }
+  
+      #blog-section {
+        position: relative;
+        width: 350px;
+        max-height: 60vh;
+        overflow-y: auto;
+        background-color: #000;
+        border: 1px solid #0ff000;
+        padding: 10px;
+        font-family: 'DejaVu Sans Mono', monospace;
+        font-size: 16px;
+        color: #0ff000;
+        box-shadow: 0 4px 10px rgba(0, 255, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+  
+      #blog-section div {
+        font-weight: bold;
+        text-align: center;
+        border-bottom: 1px solid #0ff000;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+      }
+  
+      #blog-section ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+      }
+  
+      h1, h3, #lamo {
+        margin: 0;
+        padding: 0;
+      }
+  
+      #blog-section ul li a {
+        color: #0ff000;
+        text-decoration: none;
+        display: block;
+        padding: 5px 0;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+        width: 100%;
+      }
+  
+      #blog-section ul li a:hover {
+        background-color: #0ff000;
+        color: #000;
+      }
+  
+      #axo a {
+        color: #0ff000;
+        text-decoration: none;
+      }
+  
+      #shitpost a {
+        color: #0830e2;
+        text-decoration: none;
+      }
+  
+      #donut-container {
+        position: relative;
+        width: 360px;
         height: 300px;
+        background: black;
+        border: 1px solid #0ff000;
+        padding: 5px;
         font-family: monospace;
-        color: #0ff000  ;
+        color: #0ff000;
         font-size: 10px;
         display: flex;
         flex-direction: column;
       }
-
+  
       #donut-titlebar {
         background: #001100;
         padding: 3px 0;
@@ -48,7 +119,7 @@
         font-weight: bold;
         border-bottom: 1px solid #0ff000;
       }
-
+  
       #donut {
         margin: 0;
         white-space: pre;
@@ -62,9 +133,9 @@
         font-size: 10px;
         overflow: hidden;
       }
-
+  
       #donut-container a {
-        color: #0ff000  ;
+        color: #0ff000;
         text-decoration: none;
         font-size: 12px;
         position: absolute;
@@ -73,74 +144,32 @@
         transform: translateX(-50%);
         z-index: 10;
       }
-
-    /* Blog Section (Top Right Corner) */
-    #blog-section {
-    position: fixed;
-    top: 30px;
-    right: 30px;
-    background-color: #000;
-    border: 1px solid #0ff000 ;
-    padding: 10px;
-    width: 350px;
-    font-family: 'DejaVu Sans Mono', monospace;
-    font-size: 16px;
-    color: #0ff000  ;
-    z-index: 25;
-    box-shadow: 0 4px 10px rgba(0, 255, 0, 0.3);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  #blog-section div {
-    font-weight: bold;
-    text-align: center;
-    border-bottom: 1px solid #0ff000  ;
-    padding-bottom: 5px;
-    margin-bottom: 5px; /* Reduced margin to eliminate excess space */
-  }
-
-  #blog-section ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  h1, h3, #lamo {
-      margin: 0;
-      padding: 0;
-    }
-
-  #blog-section ul li a {
-    color: #0ff000  ;
-    text-decoration: none;
-    display: block;
-    padding: 5px 0;
-    font-size: 14px; /* Reduced font size for better readability */
-    transition: background-color 0.3s ease;
-  }
-
-  #blog-section ul li a:hover {
-    background-color: #0ff000 ;
-    color: #000;
-  }
-
-  #axo a {
-    color: #0ff000  ;
-    text-decoration: none;
-  }
-  #shitpost a {
-    color: #0830e2;
-    text-decoration: none;
-  }
-
+  
+      @media (max-height: 700px), (max-width: 800px) {
+        #right-sidebar {
+          position: static;
+          flex-direction: row;
+          justify-content: center;
+          gap: 40px;
+          max-height: none;
+          overflow: visible;
+          margin: 20px auto;
+          width: 100%;
+        }
+  
+        #blog-section,
+        #donut-container {
+          width: 45vw;
+          max-height: none;
+          overflow: visible;
+        }
+      }
     </style>
 <h1>You've arrived. Welcome to zxcvHQ's official website.</h1>
   </head>
   <body>
     <h3>Hi, my name is Arnav Gawas (zxcv). Local Circuit Sower and Network Shepard. 
-      I like to build and work on random stuff with circuits, computers and mathematical equations.</h3>
+I like to build and work on random stuff with circuits, computers and mathematical equations.</h3>
   <div id="lamo">
   <h3>On the web:
       > Github: <a href="https://github.com/aln730">aln730</a>
@@ -179,7 +208,24 @@
 
   </h3>
   </div>
-
+  <div id="right-sidebar">
+    <div id="donut-container">
+      <div id="donut-titlebar">+-------[ Live Bagel Land Reaction !!!]------+</div>
+      <pre id="donut"></pre>
+      <a href="https://g.co/kgs/TuaEcrE"></a> 
+    </div>
+    <div id="blog-section">
+      <h1>Blogs</h1>
+      <ul>
+        <li><a href="blog1.html">>Bageling for the First Time</a></li>
+        <li><a href="blog2.html">>LAN Party at 3 AM</a></li>
+        <li><a href="blog3.html">>Golang Appreciation Post</a></li>
+        <li><a href="blog4.html">>Why I love fucking around n finding out?</a></li>
+        <li><a href="blog5.html">>Surviving on less than 4 hours of average sleep for 2 weeks</a></li>
+      </ul>  
+    </div>
+  </div>
+  
 
 
 
@@ -261,33 +307,13 @@
 
                   
                                         ~CHOM~
-                                            
+                                                                                
 
   </div>
   </pre>
-  <div id="donut-container">
-    <div id="donut-titlebar">+-------[ Live Bagel Land Reaction !!!]------+</div>
-    <pre id="donut"></pre>
-    <a href="https://g.co/kgs/TuaEcrE">
-    </a> 
-  </div>
-
-  <!-- Blog Section (Top Right Corner) -->
-  <div id="blog-section">
-  <h1>Blogs</h1>
-    <ul>
-      <li><a href="blog1.html">>Bageling for the First Time</a></li>
-      <li><a href="blog2.html">>LAN Party at 3 AM</a></li>
-      <li><a href="blog3.html">>Golang Appreciation Post</a></li>
-      <li><a href="blog4.html">>Why I love fucking around n finding out?</a></li>
-      <li><a href="blog5.html">>Surviving on less than 4 hours of average 
-  sleep for 2 weeks</a></li>
-    </ul>
-  </div>
-
   <!-- Icon Footer -->
 
-  <div style="position: fixed; bottom: 0; left: 0; right: 1; display: flex; flex-direction: column; align-items: center; z-index: 1;">
+  <div style="position: fixed; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column; align-items: center; z-index: 1;">
 
     <!-- First row -->
     <div style="display: flex; justify-content: center; flex-wrap: wrap;">
