@@ -71,10 +71,31 @@
 <body>
 <h1><a href="index.html">>Home</a></h1>
 
-<h1>Bageling for the First Time</h1>
+<h1>BareNet: Bare-Metal Netowork Stack</h1>
 
 <pre>
-UNDER CONSTRUCTION
+Zeronet is a bare-metal kernel targeting the x86_64 architecture, built with Limine. 
+It boots into a graphical framebuffer and is designed as a foundation for a full network stack without relying on an existing OS.
+
+Roadmap
+
+-> GDT and IDT setup
+
+-> Heap allocator
+
+-> Ethernet frame parsing
+
+-> ARP + ICMP Echo (Ping)
+
+-> UDP socket abstraction
+
+-> DNS resolver
+
+-> HTTP GET support
+
+
+Goal: Build a mini, bare-metal network stack for x86. 
+It will run without an operating system and handle raw Ethernet frames, enabling low-level packet handling and protocal implementation.
 </pre>
 
 <!-- Blog Section (Top Right Corner) -->
