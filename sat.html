@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SORT.EXE</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: monospace;
+      background: linear-gradient(135deg, #000 0%, #011 100%);
+      color: #0ff;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      color: #0ff;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #0ff;
+    }
+
+    #controls {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    select {
+      background: #001011;
+      color: #0ff;
+      border: 1px solid #0ff;
+      padding: 5px;
+      font-family: monospace;
+    }
+
+    canvas {
+      display: block;
+      margin: 20px auto;
+      background: #001011;
+      border: 2px solid #0ff;
+      box-shadow: 0 0 20px #0ff4;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #0ff6;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <h1>FLYNN.EXE :: Sort Visualizer</h1>
+  <div id="controls">
+    <label for="algorithm">Algorithm: </label>
+    <select id="algorithm">
+      <option value="radix">Radix Sort</option>
+      <option value="bubble">Bubble Sort</option>
+      <option value="quick">Quick Sort</option>
+      <option value="merge">Merge Sort</option>
+      <option value="insertion">Insertion Sort</option>
+    </select>
+  </div>
+
+  <canvas id="viz" width="720" height="400"></canvas>
+
+  <audio id="tron-audio" autoplay loop muted>
+    <source src="https://files.catbox.moe/3ztdbn.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <footer>
+    FLYNN.EXE // :: END OF LINE
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('viz');
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+    const arraySize = 120;
+    const barWidth = width / arraySize;
+    let array = [];
+
+    function resetArray() {
+      array = Array.from({ length: arraySize }, () => Math.floor(Math.random() * 256));
+    }
+
+    function drawArray(highlight = []) {
+      ctx.clearRect(0, 0, width, height);
+      array.forEach((val, idx) => {
+        ctx.fillStyle = highlight.includes(idx) ? '#ff0' : `hsl(${val}, 100%, 50%)`;
+        const h = (val / 256) * height;
+        ctx.fillRect(idx * barWidth, height - h, barWidth - 1, h);
+      });
+    }
+
+    function getDigit(num, place) {
+      return Math.floor(num / Math.pow(10, place)) % 10;
+    }
+
+    async function radixSort() {
+      let maxDigit = Math.max(...array).toString().length;
+      for (let k = 0; k < maxDigit; k++) {
+        let buckets = Array.from({ length: 10 }, () => []);
+        for (let i = 0; i < array.length; i++) {
+          let digit = getDigit(array[i], k);
+          buckets[digit].push(array[i]);
+          drawArray([i]);
+          await new Promise(res => setTimeout(res, 10));
+        }
+        array = [].concat(...buckets);
+        drawArray();
+        await new Promise(res => setTimeout(res, 200));
+      }
+    }
+
+    async function bubbleSort() {
+      for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array.length - i - 1; j++) {
+          if (array[j] > array[j + 1]) {
+            [array[j], array[j + 1]] = [array[j + 1], array[j]];
+          }
+          drawArray([j, j + 1]);
+          await new Promise(res => setTimeout(res, 10));
+        }
+      }
+    }
+
+    async function quickSort(start = 0, end = array.length - 1) {
+      if (start >= end) return;
+      let pivot = array[end];
+      let i = start;
+      for (let j = start; j < end; j++) {
+        if (array[j] < pivot) {
+          [array[i], array[j]] = [array[j], array[i]];
+          i++;
+        }
+        drawArray([i, j]);
+        await new Promise(res => setTimeout(res, 20));
+      }
+      [array[i], array[end]] = [array[end], array[i]];
+      drawArray([i]);
+      await new Promise(res => setTimeout(res, 20));
+      await quickSort(start, i - 1);
+      await quickSort(i + 1, end);
+    }
+
+    async function insertionSort() {
+      for (let i = 1; i < array.length; i++) {
+        let key = array[i];
+        let j = i - 1;
+        while (j >= 0 && array[j] > key) {
+          array[j + 1] = array[j];
+          drawArray([j, j + 1]);
+          await new Promise(res => setTimeout(res, 10));
+          j--;
+        }
+        array[j + 1] = key;
+        drawArray([j + 1]);
+        await new Promise(res => setTimeout(res, 10));
+      }
+    }
+
+    async function mergeSort(start = 0, end = array.length - 1) {
+      if (start >= end) return;
+      const mid = Math.floor((start + end) / 2);
+      await mergeSort(start, mid);
+      await mergeSort(mid + 1, end);
+      let left = array.slice(start, mid + 1);
+      let right = array.slice(mid + 1, end + 1);
+      let i = 0, j = 0, k = start;
+      while (i < left.length && j < right.length) {
+        if (left[i] <= right[j]) {
+          array[k++] = left[i++];
+        } else {
+          array[k++] = right[j++];
+        }
+        drawArray([k - 1]);
+        await new Promise(res => setTimeout(res, 10));
+      }
+      while (i < left.length) {
+        array[k++] = left[i++];
+        drawArray([k - 1]);
+        await new Promise(res => setTimeout(res, 10));
+      }
+      while (j < right.length) {
+        array[k++] = right[j++];
+        drawArray([k - 1]);
+        await new Promise(res => setTimeout(res, 10));
+      }
+    }
+
+    async function runSelectedSort() {
+      resetArray();
+      drawArray();
+      const choice = document.getElementById('algorithm').value;
+      if (choice === 'radix') await radixSort();
+      else if (choice === 'bubble') await bubbleSort();
+      else if (choice === 'quick') await quickSort();
+      else if (choice === 'merge') await mergeSort();
+      else if (choice === 'insertion') await insertionSort();
+    }
+
+    document.getElementById('algorithm').addEventListener('change', runSelectedSort);
+    resetArray();
+    drawArray();
+    runSelectedSort();
+    document.getElementById('tron-audio').muted = false;
+  </script>
+</body>
+</html>
