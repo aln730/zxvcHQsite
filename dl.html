@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DIGITAL_LOVE.EXE</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Orbitron', sans-serif;
+  background: radial-gradient(ellipse at center, #0f0c29 0%, #302b63 40%, #000000 100%);
+  color: #e0e0e0;
+  overflow: hidden;
+  font-size: 18px; /* global font boost */
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+}
+
+.player-wrapper {
+  position: relative;
+  width: 1000px; /* wider player area */
+  max-width: 95vw;
+}
+
+.player-window {
+  background: rgba(0, 0, 0, 0.45);
+  border: 4px solid #00ffff;
+  border-radius: 30px;
+  padding: 3rem;
+  box-shadow:
+    0 0 30px #00ffffaa,
+    0 0 60px #ff00ff55,
+    inset 0 0 30px #111;
+  backdrop-filter: blur(8px);
+  animation: pulseGlow 6s ease-in-out infinite;
+  z-index: 2;
+  position: relative;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 30px #00ffffaa, 0 0 60px #ff00ff55, inset 0 0 30px #111;
+  }
+  50% {
+    box-shadow: 0 0 40px #00ffffee, 0 0 80px #ff00ffaa, inset 0 0 40px #222;
+  }
+}
+
+canvas#visualizer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #00ffff, #ff00ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px #00ffff77;
+}
+
+.track-info {
+  font-size: 1.4rem;
+  color: #b0faff;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 6px #000;
+}
+
+audio {
+  width: 100%;
+  height: 40px;
+  background: #000;
+  border: none;
+  filter: drop-shadow(0 0 4px #00ffffaa);
+}
+
+audio::-webkit-media-controls-panel {
+  transform: scale(1.4);
+  transform-origin: top left;
+}
+
+
+.buttons {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.buttons img {
+  width: 132px;
+  height: 46px;
+  image-rendering: pixelated;
+  border: 2px solid #444;
+  box-shadow: 0 0 5px #00ffff88;
+}
+
+.footer {
+  margin-top: 3rem;
+  font-size: 1.1rem;
+  color: #888;
+  text-align: center;
+}
+
+code {
+  color: #00ffff;
+}
+
+a {
+  color: #00ffff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px #00ffff;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="player-wrapper">
+      <canvas id="visualizer" width="700" height="400"></canvas>
+
+      <div class="player-window">
+        <h1>DIGITAL LOVE</h1>
+        <div class="track-info">
+          Daft Punk — <em>Discovery</em> (2001)<br>
+          Genre: French House / Love-Electro
+        </div>
+        <audio controls autoplay>
+          <source src="Digital_Love.mp3" type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
+
+<div class="buttons">
+  <a href="https://zxcvhq.dev/">
+    <img src="bobbles.gif" alt="bobbles" />
+  </a>
+  <a href="https://open.spotify.com/album/2noRn2Aes5aoNVsU6iWThc?si=-eXQuRphTneDB9M3ANzjCg">
+    <img src="mswinmediaplayer8.gif" alt="mswinmediaplayer8" />
+  </a>
+  <a href="https://www.atariage.com2600/">
+    <img src="atarilogo.gif" alt="atarilogo" />
+  </a>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("visualizer");
+    const ctx = canvas.getContext("2d");
+    const audioEl = document.querySelector("audio");
+
+    let audioCtx, analyser, source, dataArray, bufferLength, running = false;
+
+    audioEl.addEventListener("play", () => {
+      if (running) return;
+
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      analyser = audioCtx.createAnalyser();
+      source = audioCtx.createMediaElementSource(audioEl);
+      source.connect(analyser);
+      analyser.connect(audioCtx.destination);
+      analyser.fftSize = 128;
+
+      bufferLength = analyser.frequencyBinCount;
+      dataArray = new Uint8Array(bufferLength);
+      running = true;
+
+      render();
+    });
+
+    function render() {
+      requestAnimationFrame(render);
+      if (!running) return;
+
+      analyser.getByteFrequencyData(dataArray);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const barWidth = 4;
+      const maxBarLen = 120;
+      const spacing = 2;
+      const midX = canvas.width / 2;
+      const midY = canvas.height / 2;
+
+      for (let i = 0; i < bufferLength / 2; i++) {
+        const value = dataArray[i] / 255;
+        const len = value * maxBarLen;
+        const hue = 200 + i * 2;
+        ctx.fillStyle = `hsl(${hue}, 100%, 70%)`;
+
+        const offset = i * (barWidth + spacing);
+
+        // Top
+        ctx.fillRect(midX - offset, 0, barWidth, len);
+        ctx.fillRect(midX + offset, 0, barWidth, len);
+
+        // Bottom
+        ctx.fillRect(midX - offset, canvas.height - len, barWidth, len);
+        ctx.fillRect(midX + offset, canvas.height - len, barWidth, len);
+
+        // Left
+        ctx.fillRect(0, midY - offset, len, barWidth);
+        ctx.fillRect(0, midY + offset, len, barWidth);
+
+        // Right
+        ctx.fillRect(canvas.width - len, midY - offset, len, barWidth);
+        ctx.fillRect(canvas.width - len, midY + offset, len, barWidth);
+      }
+    }
+  </script>
+</body>
+</html>
