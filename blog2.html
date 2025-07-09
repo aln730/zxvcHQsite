@@ -19,124 +19,127 @@ This document provides a technical guide for setting up and playing multiplayer 
 
 1. Select the Appropriate Quake Engine
 
-| Version        | Protocol    | Description                                                       |
-|----------------|-------------|-------------------------------------------------------------------|
-| **NetQuake**   | Original    | Vanilla networking; suitable for LAN or nostalgia.                |
-| **QuakeWorld** | Optimized   | Online-optimized with prediction, ping correction, and community  |
-|                |             | servers.                                                          |
+    | Version        | Protocol    | Description                                                       |
+    |----------------|-------------|-------------------------------------------------------------------|
+    | **NetQuake**   | Original    | Vanilla networking; suitable for LAN or nostalgia.                |
+    | **QuakeWorld** | Optimized   | Online-optimized with prediction, ping correction, and community  |
+    |                |             | servers.                                                          |
 
-Recommended Clients
+    Recommended Clients
 
-- NetQuake: `QuakeSpasm`, `vkQuake`, `DarkPlaces`
-- QuakeWorld: `ezQuake`, `nQuake`, `FodQuake`
+    - NetQuake: `QuakeSpasm`, `vkQuake`, `DarkPlaces`
+    - QuakeWorld: `ezQuake`, `nQuake`, `FodQuake`
 
 ---
 
 2. Acquire Game Data
 
-You need the original Quake data files:
+    You need the original Quake data files:
 
-- `pak0.pak` (required, from shareware or full version)
-- `pak1.pak` (optional, from full version)
+    - `pak0.pak` (required, from shareware or full version)
+    - `pak1.pak` (optional, from full version)
 
-Place these in the `id1/` directory inside your client directory:
-quake/
-├── ezquake.exe
-└── id1/
-├── pak0.pak
-└── pak1.pak
+    Place these in the `id1/` directory inside your client directory:
+    quake/
+    ├── ezquake.exe
+    └── id1/
+    ├── pak0.pak
+    └── pak1.pak
 
 ---
 
 3. Running the Client
 
-NetQuake Example (QuakeSpasm):
-./quakespasm -game id1
-
+    NetQuake Example (QuakeSpasm):
+    ./quakespasm -game id1
 
 ---
 
 
 4. Joining a Multiplayer Game
 
-a. Public Servers, QuakeWorld (recommended)
+    a. Public Servers, QuakeWorld (recommended)
 
-    1. Launch ezQuake
+        1. Launch ezQuake
 
-    2. Press ESC → Multiplayer → Server Browser
+        2. Press ESC → Multiplayer → Server Browser
 
-    3. Select and join a server
+        3. Select and join a server
 
-Manual (CLI):
+    Manual (CLI):
 
-    /connect <ip>:<port>, example: /connect qw.foppa.dk:28501
+        /connect <ip>:<port>, example: /connect qw.foppa.dk:28501
 
 
 
-b. Direct IP / LAN Connect
+    b. Direct IP / LAN Connect
 
-If another player is hosting:
+    If another player is hosting:
 
-/connect <host_ip>:<port>
+    /connect <host_ip>:<port>
 
-Default ports:
+    Default ports:
 
-    NetQuake: 26000
+        NetQuake: 26000
 
-    QuakeWorld: 27500
+        QuakeWorld: 27500
+---
 
 
 5. Hosting a Server
 
-a. Dedicated Server; NetQuake:
+    a. Dedicated Server; NetQuake:
 
 
-./quake -dedicated 1 +map start
+    ./quake -dedicated 1 +map start
 
-QuakeWorld:
+    QuakeWorld:
 
-./qwsv +map dm6
+    ./qwsv +map dm6
 
-Make sure to port-forward appropriately.
+    Make sure to port-forward appropriately.
 
 
-b. LAN Hosting (non-dedicated)
+    b. LAN Hosting (non-dedicated)
 
-From a Quake client:
+    From a Quake client:
 
-/map e1m1
+    /map e1m1
 
-Other players join via:
+    Other players join via:
 
-/connect <host_ip>
+    /connect <host_ip>
+---
 
 
 6. Game Modes
 
-Mode	Command-line Parameters
+    Mode	Command-line Parameters
 
-Deathmatch	+deathmatch 1
-Team Deathmatch	+deathmatch 1 +teamplay 1
-Cooperative	+coop 1 +deathmatch 0
-Capture the Flag	Requires additional mods and maps
+    Deathmatch	+deathmatch 1
+    Team Deathmatch	+deathmatch 1 +teamplay 1
+    Cooperative	+coop 1 +deathmatch 0
+    Capture the Flag	Requires additional mods and maps
+---
 
 
 7. Configuration
-autoexec.cfg (QuakeWorld Example)
 
-Create in qw/autoexec.cfg:
+    autoexec.cfg (QuakeWorld Example)
 
-name "PlayerName"
-rate 25000
-cl_maxfps 72
-+mlook
+    Create in qw/autoexec.cfg:
 
-Server Variables (in console or config):
+    name "PlayerName"
+    rate 25000
+    cl_maxfps 72
+    +mlook
 
-fraglimit 30
-timelimit 10
-hostname "Quake Server"
+    Server Variables (in console or config):
 
+    fraglimit 30
+    timelimit 10
+    hostname "Quake Server"
+---
 
 8. Resources
 
@@ -145,6 +148,7 @@ hostname "Quake Server"
     QuakeWorld Installer (nQuake): https://nquake.com/
 
     QuakeSpasm (NetQuake client): https://sourceforge.net/projects/quake/
+---
 
 
 9. Notes
@@ -155,13 +159,13 @@ hostname "Quake Server"
 
     VPNs like ZeroTier or Tailscale can be used to simulate LAN over the Internet.
 
-Optional: Firewall/Port Forwarding
+    Optional: Firewall/Port Forwarding
 
-    NetQuake Default Port: 26000
+        NetQuake Default Port: 26000
 
-    QuakeWorld Default Port: 27500
+        QuakeWorld Default Port: 27500
 
-Ensure these are open or forwarded on your router/firewall when hosting.
+    Ensure these are open or forwarded on your router/firewall when hosting.
 </pre>
 
 <!-- Blog Section (Top Right Corner) -->
