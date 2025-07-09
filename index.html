@@ -22,6 +22,11 @@
         overflow: clip;
       }
 
+        h1, h3, #lamo {
+        margin: 0;
+        padding: 0;
+      }
+
   
       #lamo a {
         color: #2b63dd;
@@ -40,67 +45,62 @@
         z-index: 50;
       }
   
-      #blog-section {
-        position: relative;
-        width: 350px;
-        max-height: 60vh;
-        overflow-y: auto;
-        background-color: #000;
-        border: 1px solid #0ff000;
-        padding: 10px;
-        font-family: 'DejaVu Sans Mono', monospace;
-        font-size: 16px;
-        color: #0ff000;
-        box-shadow: 0 4px 10px rgba(0, 255, 0, 0.3);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-  
-      #blog-section div {
-        font-weight: bold;
-        text-align: center;
-        border-bottom: 1px solid #0ff000;
-        padding-bottom: 5px;
-        margin-bottom: 5px;
-      }
-  
-      #blog-section ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-      }
-  
-      h1, h3, #lamo {
-        margin: 0;
-        padding: 0;
-      }
-  
-      #blog-section ul li a {
-        color: #0ff000;
-        text-decoration: none;
-        display: block;
-        padding: 5px 0;
-        font-size: 14px;
-        transition: background-color 0.3s ease;
-        width: 100%;
-      }
-  
-      #blog-section ul li a:hover {
-        background-color: #0ff000;
-        color: #000;
-      }
-  
-      #axo a {
-        color: #0ff000;
-        text-decoration: none;
-      }
-  
-      #shitpost a {
-        color: #0830e2;
-        text-decoration: none;
-      }
+#blog-section {
+  position: relative;
+  width: 350px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background-color: #000;
+  border: 1px solid #0ff000;
+  padding: 10px;
+  font-family: 'DejaVu Sans Mono', monospace;
+  font-size: 14px;
+  color: #0ff000;
+  box-shadow: 0 4px 10px rgba(0, 255, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1; /* Base line height */
+}
+
+#blog-section div {
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid #0ff000;
+}
+
+#blog-section ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+#blog-section ul li {
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+#blog-section ul li a {
+  color: #0ff000;
+  text-decoration: none;
+  display: grid;
+  gap: 0;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+#blog-section ul li a:hover {
+  background-color: #0ff000;
+  color: #000;
+}
+
+
   
       #donut-container {
         position: relative;
@@ -174,8 +174,7 @@
   <body>
     <h3>Hi, my name is AGawas (zxcv). Local Circuit Sower and Network Shepard. 
 I like to build and work on random stuff with circuits, computers and mathematics.</h3>
-  <div id="lamo">
-  <h3>  About me:
+  <div id="lamo"><h3>  About me:
       • Specialties: C, C++, Go, Java, Python, Rust, SQL, Embedded Systems, Data Visualization, Databases, Shell Scripting
       • Operating Systems: Fedora (daily driver), bare-metal (custom x86_64 kernel development)
       • Tools: Docker, Git, GNU Make, Kubernetes, OKDShift
@@ -223,13 +222,23 @@ I like to build and work on random stuff with circuits, computers and mathematic
     <div id="blog-section">
       <h1>Posts</h1>
       <ul>
-        <li><a href="blog1.html">>BareNet: Bare-Metal Network Stack</a></li>
-        <li><a href="blog2.html">>LAN Party at 3 AM</a></li>
-        <li><a href="blog3.html">>Golang Appreciation Post</a></li>
-        <li><a href="blog4.html">>Why I love messing around</a></li>
-        <li><a href="blog5.html">>Surviving on less than 4 hours</a></li>
+        <li><a href="blog1.html">├─ BareNet: Bare-Metal Network Stack</a></li>
+        <li><a href="blog2.html">├─ LAN Party at 3 AM</a></li>
+        <li><a href="blog3.html">├─ Golang Appreciation Post</a></li>
+        <li><a href="blog4.html">├─ Why I love messing around</a></li>
+        <li><a href="blog5.html">└─ Surviving on less than 4 hours</a></li>
       </ul>  
     </div>
+<div id="blog-section">
+  <h1>Projects</h1>
+  <ul>
+    <li><a href="https://github.com/aln730/BareNet">├─ BareNet: Bare-Metal Network Stack</a></li>
+    <li><a href="https://github.com/aln730/Halide">├─ Halide: CLI music player</a></li>
+    <li><a href="https://github.com/aln730/StripSync">├─ StripSync: LED Web Interface</a></li>
+    <li><a href="https://github.com/aln730/zxcvsync">└─ zxcvSync: Remote text updates</a></li>
+  </ul>
+</div>
+
   </div>
   </pre>
   <!-- Icon Footer -->
