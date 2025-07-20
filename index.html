@@ -172,25 +172,12 @@
         flex-direction: row;
 
       }
-      @media (max-height: 700px), (max-width: 800px) {
-        #right-sidebar {
-          position: static;
-          flex-direction: row;
-          justify-content: center;
-          gap: 40px;
-          max-height: none;
-          overflow: visible;
-          margin: 20px auto;
-          width: 100%;
-        }
-  
-        #blog-section,
-        #donut-container {
-          width: 45vw;
-          max-height: none;
-          overflow: visible;
-        }
+@media (max-width: 1000px) {
+      #right-sidebar {
+        display: none !important;
       }
+    }
+
     </style>
 <h1>You've arrived. Welcome to zxcvHQ's official website.</h1>
   </head>
