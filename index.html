@@ -1,286 +1,348 @@
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <link rel="icon" href="rover_read.gif" type="image/png" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="rover_read.gif" type="image/png" />
 
-    <meta charset="UTF-8" />
-    <title>zxcvWeb</title>
-    <meta property="og:title" content="zxcvWeb — the official zxcvHQ website">
-    <meta property="og:description" content="Zxcv's corner for circuits, networks, and cool internet stuff.">
-    <meta property="og:image" content="https://zxcvhq.dev/robot.png"> <!-- Replace with your own preview image -->
-    <meta property="og:url" content="https://zxcvhq.dev">
-    <style>
-      @font-face {
-        font-family: 'DejaVu Sans Mono';
-        src: url('DejaVuSansMono.ttf') format('truetype');
-      }
-  
-      body {
-        margin: 0;
-        padding: 20px;
-        background-color: #000;
-        color: #fff;
-        font-family: 'DejaVu Sans Mono', monospace;
-        font-size: 14px;
-        white-space: pre;
-        position: relative;
-        height: 100vh;
-        overflow: auto;
-      }
+  <meta charset="UTF-8" />
+  <title>zxcvWeb</title>
+  <meta property="og:title" content="zxcvWeb — the official zxcvHQ website">
+  <meta property="og:description" content="Zxcv's corner for circuits, networks, and cool internet stuff.">
+  <meta property="og:image" content="https://zxcvhq.dev/robot.png">
+  <meta property="og:url" content="https://zxcvhq.dev">
+  <style>
+    @font-face {
+      font-family: 'DejaVu Sans Mono';
+      src: url('DejaVuSansMono.ttf') format('truetype');
+    }
 
-        h1, h3, #lamo {
-        margin: 0;
-        padding: 0;
-      }
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #000;
+      color: #fff;
+      font-family: 'DejaVu Sans Mono', monospace;
+      font-size: 14px;
+      white-space: pre;
+      position: relative;
+      padding-bottom: 200px; 
+    }
 
+    h1, h3, #lamo {
+      margin: 0;
+      padding: 0;
+    }
+
+    #lamo a {
+      color: #2b63dd;
+      text-decoration: none;
+    }
+
+   
+    #right-sidebar {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-height: calc(100vh - 60px);
+      overflow-y: auto;
+      z-index: 50;
   
-      #lamo a {
-        color: #2b63dd;
-        text-decoration: none;
-      }
-  
+      background-color: #000;
+      border: 1px solid #0ff000;
+      padding: 10px;
+      box-shadow: 0 4px 10px rgba(0, 255, 0, 0.3);
+      transition: transform 0.3s ease-in-out, right 0.3s ease; 
+    }
+
+
+    .menu-toggle {
+      display: none; 
+    }
+
+    .menu-icon {
+      display: none;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 30px;
+      height: 25px;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 100;
+    }
+
+    .menu-icon span {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background-color: #0ff000;
+      transition: all 0.3s ease;
+    }
+
+
+    .menu-toggle:checked + .menu-icon span:nth-child(1) {
+      transform: translateY(11px) rotate(45deg);
+    }
+    .menu-toggle:checked + .menu-icon span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle:checked + .menu-icon span:nth-child(3) {
+      transform: translateY(-11px) rotate(-45deg);
+    }
+
+    #blog-section {
+      position: relative; 
+      width: 350px; 
+      max-height: 60vh;
+      overflow-y: auto;
+      background-color: #000;
+      border: 1px solid #0ff000;
+      padding: 10px;
+      font-family: 'DejaVu Sans Mono', monospace;
+      font-size: 14px;
+      color: #0ff000;
+      box-shadow: 0 4px 10px rgba(0, 255, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1;
+    }
+
+    #blog-section div {
+      font-weight: bold;
+      text-align: center;
+      border-bottom: 1px solid #0ff000;
+    }
+
+    #blog-section ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+
+    #blog-section ul li {
+      padding: 0;
+      margin: 0;
+      line-height: 1;
+    }
+
+    #blog-section ul li a {
+      color: #0ff000;
+      text-decoration: none;
+      display: grid;
+      gap: 0;
+      font-size: 14px;
+      padding: 0;
+      margin: 0;
+      line-height: 1;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    #blog-section ul li a:hover {
+      background-color: #0ff000;
+    }
+
+    #donut-container {
+      position: relative;
+      width: 360px;
+      height: 300px;
+      background: black;
+      border: 1px solid #0ff000;
+      padding: 5px;
+      font-family: monospace;
+      color: #0ff000;
+      font-size: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #donut-titlebar {
+      background: #001100;
+      padding: 3px 0;
+      text-align: center;
+      font-weight: bold;
+      border-bottom: 1px solid #0ff000;
+    }
+
+    #donut {
+      margin: 0;
+      white-space: pre;
+      text-align: center;
+      letter-spacing: 0.6px;
+      line-height: 1.1;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      overflow: hidden;
+    }
+
+    #donut-container a {
+      color: #0ff000;
+      text-decoration: none;
+      font-size: 12px;
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+    .icon-img {
+      width: 8vw;        
+      max-width: 120px;   
+      height: auto;
+      flex-shrink: 0;
+    }
+    #gif-container {
+      position: relative;
+      width: 360px; 
+      height: 150px;
+      background: black;
+      border: 1px solid #0ff000;
+      padding: 5px;
+      font-family: monospace;
+      color: #0ff000;
+      font-size: 10px;
+      display: flex;
+      flex-direction: row;
+    }
+
+
+    @media (max-width: 1683px) {
+
       #right-sidebar {
-        position: fixed;
-        top: 30px;
-        right: 30px;
+        right: 20px;
+        top: 60px;
+        width: 350px; 
+        transform: translateX(120%);
+        z-index: 90;
+      }
+
+ 
+      .menu-icon {
         display: flex;
-        flex-direction: column;
-        gap: 20px;
-        max-height: calc(100vh - 60px);
-        overflow-y: auto;
-        z-index: 50;
       }
-  
-#blog-section {
-  position: relative;
-  width: 350px;
-  max-height: 60vh;
-  overflow-y: auto;
-  background-color: #000;
-  border: 1px solid #0ff000;
-  padding: 10px;
-  font-family: 'DejaVu Sans Mono', monospace;
-  font-size: 14px;
-  color: #0ff000;
-  box-shadow: 0 4px 10px rgba(0, 255, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  line-height: 1; /* Base line height */
-}
 
-#blog-section div {
-  font-weight: bold;
-  text-align: center;
-  border-bottom: 1px solid #0ff000;
-}
-
-#blog-section ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
-#blog-section ul li {
-  padding: 0;
-  margin: 0;
-  line-height: 1;
-}
-
-#blog-section ul li a {
-  color: #0ff000;
-  text-decoration: none;
-  display: grid;
-  gap: 0;
-  font-size: 14px;
-  padding: 0;
-  margin: 0;
-  line-height: 1;
-  width: 100%;
-  transition: background-color 0.3s ease;
-}
-
-#blog-section ul li a:hover {
-  background-color: #0ff000;
-}
-
-
-  
-      #donut-container {
-        position: relative;
-        width: 360px;
-        height: 300px;
-        background: black;
-        border: 1px solid #0ff000;
-        padding: 5px;
-        font-family: monospace;
-        color: #0ff000;
-        font-size: 10px;
-        display: flex;
-        flex-direction: column;
-      }
-  
-      #donut-titlebar {
-        background: #001100;
-        padding: 3px 0;
-        text-align: center;
-        font-weight: bold;
-        border-bottom: 1px solid #0ff000;
-      }
-  
-      #donut {
-        margin: 0;
-        white-space: pre;
-        text-align: center;
-        letter-spacing: 0.6px;
-        line-height: 1.1;
-        flex-grow: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 10px;
-        overflow: hidden;
-      }
-  
-      #donut-container a {
-        color: #0ff000;
-        text-decoration: none;
-        font-size: 12px;
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 10;
-      }
-      .icon-img {
-  width: 8vw;         /* Resizes based on viewport width */
-  max-width: 120px;   /* Caps size */
-  height: auto;
-  flex-shrink: 0;}
-      #gif-container {
-        position: relative;
-        width: 360px;
-        height: 150px;
-        background: black;
-        border: 1px solid #0ff000;
-        padding: 5px;
-        font-family: monospace;
-        color: #0ff000;
-        font-size: 10px;
-        display: flex;
-        flex-direction: row;
-
-      }
-@media (max-width: 1000px) {
-      #right-sidebar {
-        display: none !important;
+      .menu-toggle:checked ~ #right-sidebar {
+        transform: translateX(0);
       }
     }
 
-    </style>
-<h1>You've arrived. Welcome to zxcvHQ's official website.</h1>
-  </head>
-  <body>
-    <h3>Hi, my name is AGawas (zxcv). Local Circuit Sower and Network Shepard. 
+  </style>
+  <h1>You've arrived. Welcome to zxcvHQ's official website.</h1>
+</head>
+<body>
+  <h3>Hi, my name is AGawas (zxcv). Local Circuit Sower and Network Shepard.
 I like to build and work on random stuff with circuits, computers and mathematics.</h3>
-  <div id="lamo"><h3>  About me:
-      • Specialties: C, C++, Go, Java, Python, Rust, SQL, Embedded Systems, Operating Systems, Shell Scripting
-      • Operating Systems: Fedora (daily driver), bare-metal (custom x86_64 kernel development)
-      • Tools: Docker, Git, GNU Make, Kubernetes, OKDShift
+<div id="lamo"><h3>  About me:
+    • Specialties: C, C++, Go, Java, Python, Rust, SQL, Embedded Systems, Operating Systems, Shell Scripting
+    • Operating Systems: Fedora (daily driver), bare-metal (custom x86_64 kernel development)
+    • Tools: Docker, Git, GNU Make, Kubernetes, OKDShift
 
-  On the web:
-      • Github: <a href="https://github.com/aln730">aln730</a>
-      • Mail : arnsg730@proton.me
-      • Discord: <a href="https://discord.com/channels/@aiubnf">@aiubnf</a>
+On the web:
+    • Github: <a href="https://github.com/aln730">aln730</a>
+    • Mail : arnsg730@proton.me
+    • Discord: <a href="https://discord.com/channels/@aiubnf">@aiubnf</a>
 
-  ▶ Cool stuff/
-      ┣━ <a href="https://www.nand2tetris.org/">Computers and Tetris!?</a>
-      ┣━ <a href="https://wiki.osdev.org/Expanded_Main_Page">wiki.osdev</a> 
-      ┣━ <a href="https://github.com/embedded-boston/awesome-embedded-systems">EMBEDDED SYSTEMS!!</a> 
-      ┣━ <a href="https://ipj.dreamhosters.com/">NETWORKING AND COOL STUFF</a>
-      ┣━ <a href="https://github.com/okd-project/okd/releases">OKD IS BASED</a>
-      ┣━ <a href="https://open.kattis.com/">KATTIS</a>
-      ┣━ <a href="https://meshtastic.org/">Meshtastic - An opensource, off-grid, decentralized mesh network</a>
-      ┣━ <a href="https://beej.us/guide/bgnet/">beej.us/guide/bgnet/</a>
-      ┗━ <a href="https://aln730.github.io/zxcvSEngine/">My OWN Search Engine (Work in Progress!)</a>
+▶ Cool stuff/
+    ┣━ <a href="https://www.nand2tetris.org/">Computers and Tetris!?</a>
+    ┣━ <a href="https://wiki.osdev.org/Expanded_Main_Page">wiki.osdev</a>
+    ┣━ <a href="https://github.com/embedded-boston/awesome-embedded-systems">EMBEDDED SYSTEMS!!</a>
+    ┣━ <a href="https://ipj.dreamhosters.com/">NETWORKING AND COOL STUFF</a>
+    ┣━ <a href="https://github.com/okd-project/okd/releases">OKD IS BASED</a>
+    ┣━ <a href="https://open.kattis.com/">KATTIS</a>
+    ┣━ <a href="https://meshtastic.org/">Meshtastic - An opensource, off-grid, decentralized mesh network</a>
+    ┣━ <a href="https://beej.us/guide/bgnet/">beej.us/guide/bgnet/</a>
+    ┗━ <a href="https://aln730.github.io/zxcvSEngine/">My OWN Search Engine (Work in Progress!)</a>
 
-  ▶ Gamer hax/
-      ┣━ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-      ┣━ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-      ┣━ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-      ┗━ sudo dnf thefuck
+▶ Gamer hax/
+    ┣━ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    ┣━ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    ┣━ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ┗━ sudo dnf thefuck
 
-  ▶ Favorite Sofware/
-      ┣━ <a href="https://www.kicad.org/">KiCad EDA - Schematic Capture & PCB Design Software</a>
-      ┣━ <a href="https://winampheritage.com/">WinAmp - A classic, customizable media player</a>
-      ┗━ <a href="https://sourceforge.net/projects/hesuvi/">HeSuVi - Headphone Surround Virtualizations for Equalizer APO </a>
+▶ Favorite Sofware/
+    ┣━ <a href="https://www.kicad.org/">KiCad EDA - Schematic Capture & PCB Design Software</a>
+    ┣━ <a href="https://winampheritage.com/">WinAmp - A classic, customizable media player</a>
+    ┗━ <a href="https://sourceforge.net/projects/hesuvi/">HeSuVi - Headphone Surround Virtualizations for Equalizer APO </a>
 
-  ▶ <a href="https://zxcv.atabook.org/">Sign my guestbook :></a>
-    <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-       <h2>(my configuration files)/</h2>
-      <a href="https://github.com/aln730/vim-config">
-        <img src="vim-linux.gif">
-      </a>
-      <a href="https://github.com/aln730/nixos-config">
-        <img src="nixos.gif">
-      </a>
-      <a href="https://github.com/aln730/dotfiles">
-        <img src="fallout.gif">
-      </a>  
-    </div>
-  
-
-
-
-
-
-
-  ▶ Misc Stuff/
-      ┣━ <a href="wiki.osdev.org/Nick_Stacky" target="_blank">Nick Stacky</a>
-      ┗━ <a href="https://en.wikipedia.org/wiki/Wire_wrap" target="_blank">Learning how to wirewrap circuits</a>
-  </h3>
-
-  <div id="mobile">
-    <img src="8ffa3613769909735fd576afd792156273ea9b96531bb5721a17f50ce4b0b48c-3596733814.jpg">
+▶ <a href="https://zxcv.atabook.org/">Sign my guestbook :></a>
+  <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+     <h2>(my configuration files)/</h2>
+    <a href="https://github.com/aln730/vim-config">
+      <img src="vim-linux.gif">
+    </a>
+    <a href="https://github.com/aln730/nixos-config">
+      <img src="nixos.gif">
+    </a>
+    <a href="https://github.com/aln730/dotfiles">
+      <img src="fallout.gif">
+    </a>
   </div>
-  </div>
-  <div id="right-sidebar">
-    <div id="donut-container">
-      <div id="donut-titlebar">+-------[ Live Bagel Land Reaction !!!]------+</div>
-      <pre id="donut"></pre>
-      <a href="https://g.co/kgs/TuaEcrE"></a> 
-    </div>
-    <div id="blog-section">
-      <h1>Posts</h1>
-      <ul>
-        <li><a href="blog1.html">├─ BareNet: Bare-Metal Network Stack</a></li>
-        <li><a href="blog2.html">├─ LAN Party at 3 AM</a></li>
-        <li><a href="blog3.html">├─ Golang Appreciation Post</a></li>
-        <li><a href="blog4.html">├─ Why I love messing around</a></li>
-        <li><a href="blog5.html">└─ Surviving on less than 4 hours</a></li>
-      </ul>  
-    </div>
-<div id="blog-section">
-  <h1>Projects</h1>
-  <ul>
-    <li><a href="https://github.com/aln730/BareNet">├─ BareNet: Bare-Metal Network Stack</a></li>
-    <li><a href="https://github.com/aln730/Halide">├─ Halide: CLI music player</a></li>
-    <li><a href="https://github.com/aln730/StripSync">├─ StripSync: LED Web Interface</a></li>
-    <li><a href="https://github.com/aln730/zxcvhqsync">└─ zxcvhqSync: Remote text updates</a></li>
-  </ul>
+
+
+
+
+
+▶ Misc Stuff/
+    ┣━ <a href="wiki.osdev.org/Nick_Stacky" target="_blank">Nick Stacky</a>
+    ┗━ <a href="https://en.wikipedia.org/wiki/Wire_wrap" target="_blank">Learning how to wirewrap circuits</a>
+</h3>
+
+<div id="mobile">
+  <img src="8ffa3613769909735fd576afd792156273ea9b96531bb5721a17f50ce4b0b48c-3596733814.jpg">
 </div>
-<div id="gif-container">
-<img src="sheep.gif" style="width: 120px;">
-<img src="under-construction-geocities.gif" style="width: 120px;">
-<img src="dan-farrimond-lighthouse.gif" style="width: 120px;">
 </div>
+
+<input type="checkbox" id="menu-toggle" class="menu-toggle">
+<label for="menu-toggle" class="menu-icon">
+  <span></span>
+  <span></span>
+  <span></span>
+</label>
+
+<div id="right-sidebar">
+  <div id="donut-container">
+    <div id="donut-titlebar">+-------[ Live Bagel Land Reaction !!!]------+</div>
+    <pre id="donut"></pre>
+    <a href="https://g.co/kgs/TuaEcrE"></a>
   </div>
-  </pre>
+  <div id="blog-section">
+    <h1>Posts</h1>
+    <ul>
+      <li><a href="blog1.html">├─ BareNet: Bare-Metal Network Stack</a></li>
+      <li><a href="blog2.html">├─ LAN Party at 3 AM</a></li>
+      <li><a href="blog3.html">├─ Golang Appreciation Post</a></li>
+      <li><a href="blog4.html">├─ Why I love messing around</a></li>
+      <li><a href="blog5.html">└─ Surviving on less than 4 hours</a></li>
+    </ul>
+  </div>
+  <div id="blog-section">
+    <h1>Projects</h1>
+    <ul>
+      <li><a href="https://github.com/aln730/BareNet">├─ BareNet: Bare-Metal Network Stack</a></li>
+      <li><a href="https://github.com/aln730/Halide">├─ Halide: CLI music player</a></li>
+      <li><a href="https://github.com/aln730/StripSync">├─ StripSync: LED Web Interface</a></li>
+      <li><a href="https://github.com/aln730/zxcvhqsync">└─ zxcvhqSync: Remote text updates</a></li>
+    </ul>
+  </div>
+  <div id="gif-container">
+    <img src="sheep.gif" style="width: 120px;">
+    <img src="under-construction-geocities.gif" style="width: 120px;">
+    <img src="dan-farrimond-lighthouse.gif" style="width: 120px;">
+  </div>
+</div>
+</pre>
   <!-- Icon Footer -->
-<div style="position: fixed; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column; align-items: flex-start; z-index: 1; padding: 10px;">
-  <!-- Shared Style for Rows -->
-  <div style="display: flex; flex-wrap: wrap; width: 100%; justify-content: flex-start; gap: 0px;">
+  <div style="position: fixed; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column; align-items: flex-start; z-index: 1; padding: 10px;">
+   <!-- Shared Style for Rows -->
+    <div style="display: flex; flex-wrap: wrap; width: 100%; justify-content: flex-start; gap: 0px;">
     <a href="https://neovim.io/"><img src="vim.gif" class="icon-img"></a>
     <a href="https://fedoraproject.org/"><img src="fedora.png" class="icon-img"></a>
     <a href="http://www.openarena.ws"><img src="quake.gif" class="icon-img"></a>
@@ -305,8 +367,7 @@ I like to build and work on random stuff with circuits, computers and mathematic
     <a href="https://youtu.be/u4ecB57jFhI?si=l1uXlmLR-CJWUMcZ"><img src="bit.gif" class="icon-img"></a>
   </div>
 </div>
-  <!-- Matrix Background -->
   <canvas id="cmatrix" style="position: fixed; top: 0; left: 0; z-index: -1;"></canvas>
   <script src="script.js"></script>
-  </body>
-  </html>
+</body>
+</html>
