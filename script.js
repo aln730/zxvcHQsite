@@ -1,4 +1,5 @@
       // Matrix animation
+      /*
       const canvas = document.getElementById('cmatrix');
       const ctx = canvas.getContext('2d');
       canvas.width = window.innerWidth;
@@ -27,6 +28,8 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
       });
+
+      */
     
       let A = 0, B = 0;
       const donut = document.getElementById("donut");
