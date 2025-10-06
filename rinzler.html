@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="rover_read.gif" type="image/png" />
+  <meta charset="UTF-8" />
+  <title>Gallery</title>
+  <style>
+    body {
+      background: black;
+      color: white;
+      margin: 0;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      text-align: left;
+      padding: 20px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    header h1 {
+      margin: 5px 20px;
+    }
+
+    header a {
+      color: rgb(0, 255, 42);
+      text-decoration: none;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    /* ✅ Added only this */
+    .row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    video {
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+      border: none;
+    }
+
+    button:hover {
+      color: #888;
+    }
+  </style>
+  <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+  <header>
+    <h1><a href="https://zxcvhq.dev/">> Home</a></h1>
+    <h1>RINZLER</h1>
+  </header>
+
+  <main>
+    <div class="row">
+      <img src="rizzler.jpg" width="100px">
+      <img src="rizzler.jpg" width="100px">
+      <img src="rizzler.jpg" width="100px">
+      <img src="rizzler.jpg" width="100px">
+    </div>
+
+    <video id="bg-video" loop>
+      <source src="rinzler.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <button id="playPause">▶ Start</button>
+
+    <div class="row">
+      <img src="rizzler.jpg" width="100px">
+      <img src="rizzler.jpg" width="100px">
+      <img src="rizzler.jpg" width="100px">
+      <img src="rizzler.jpg" width="100px">
+    </div>
+  </main>
+
+  <script>
+    const video = document.getElementById('bg-video');
+    const button = document.getElementById('playPause');
+
+    button.addEventListener('click', () => {
+      if (video.paused) {
+        video.play();
+        button.textContent = '⏸ Pause';
+      } else {
+        video.pause();
+        button.textContent = '▶ Start';
+      }
+    });
+  </script>
+
+</body>
+</html>
