@@ -1,40 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" href="rover_read.gif" type="image/png" /> 
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Resume</title>
   <style>
-    body {
-      background: black;
-      color: white;
-      font-family: monospace;
-      text-align: center;
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
+      background: black;
+      color: white;
+      text-align: center;
+      font-family: monospace;
     }
-
     a {
       color: rgb(64, 255, 0);
       text-decoration: none;
       display: inline-block;
-      margin: 20px 0;
+      margin: 10px 0;
     }
-
-    img {
-      max-width: 70%;
-      height: auto;
-      margin-top: 20px;
-      border: 2px solid rgb(64, 255, 0); /* optional green border */
+    iframe {
+      width: 90%;
+      height: 90vh;
+      border: none;
     }
   </style>
 </head>
 <body>
 
   <h1><a href="https://zxcvhq.dev/">> Home</a></h1>
+  <h1>Resume</h1>
 
-  <!-- Resume image -->
-  <img src="resume.jpg" alt="My Resume">
+  <!-- PDF iframe -->
+  <iframe src="ArnavGawas.pdf#toolbar=0&navpanes=0&scrollbar=0"></iframe>
+
+  <!-- Optional download link -->
+  <p><a href="ArnavGawas.pdf" download>Download PDF</a></p>
 
 </body>
 </html>
