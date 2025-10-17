@@ -1,80 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="rover_read.gif" type="image/png" />
   <meta charset="UTF-8" />
   <title>Gallery</title>
-<style>
-  .cropped-image {
-    width: 300px;
-    height: 300px;
-    object-fit: cover; 
-    object-position: center;
-  }
-</style>
-<link rel="stylesheet" href="blog.css">
+  <link rel="icon" href="rover_read.gif" type="image/png" />
+  <link rel="stylesheet" href="blog.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 a {
+      text-decoration: none;
+      color: rgb(0, 255, 21);
+    }
+
+    #gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 5px;
+      margin: 20px 0;
+    }
+
+    .cropped-image.gallery-item {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+
+    /* Hide gallery on small/mobile screens */
+    @media (max-width: 768px) {
+      #gallery, #pagination-controls {
+        display: none;
+      }
+    }
+
+    #pagination-controls {
+      margin: 20px 0;
+    }
+
+    #pagination-controls button {
+      padding: 6px 12px;
+      margin: 0 3px;
+      font-size: 16px;
+      cursor: pointer;
+      border: 1px solid #333;
+      background-color: #5eff00;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+
+    #pagination-controls button:hover {
+      background-color: #ffffff;
+    }
+
+    #pagination-controls button.active {
+      background-color: #333;
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
+  <h1><a href="https://zxcvhq.dev/">>Home<</a> Gallery (In Progress, S3 soon; Uncompressed Images take time to load!)</h1>
 
-  <h1><a href="https://zxcvhq.dev/">> Home</a></h1>
-<h1>Gallery (In Progress, S3 soon; Uncompressed Images take time to load!)</h1>
-<div style="display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; align-items: center;">
-  <img src="pics/train.jpeg" class="cropped-image">
-  <img src="pics/thinkpad.png" class="cropped-image">
-  <img src="pics/IMG_20240914_012453.jpg" class="cropped-image">
-  <img src="pics/IMG_20241129_203339.jpg" class="cropped-image">
-  <img src="pics/IMG20240825213858.jpg" class="cropped-image">
-  <img src="pics/IMG20240911235820.jpg" class="cropped-image">
-  <img src="pics/IMG20241011185242.jpg" class="cropped-image">
-  <img src="pics/IMG20241012124905.jpg" class="cropped-image">
-  <img src="pics/IMG20241128225213~2.jpg" class="cropped-image">
-  <img src="pics/IMG20250131174619.jpg" class="cropped-image">
-  <img src="pics/IMG20250220221902.jpg" class="cropped-image">
-  <img src="pics/IMG20250406000129.jpg" class="cropped-image">
-  <img src="pics/IMG20250415001102.jpg" class="cropped-image">
-  <img src="pics/IMG20250502172424.jpg" class="cropped-image">
-  <img src="pics/IMG20250502204301.jpg" class="cropped-image">
-  <img src="pics/IMG20250118012503.jpg" class="cropped-image">
-  <img src="pics/IMG20250510104051~2.jpg" style="width: 300px;">
-  <img src="pics/IMG20250510104412~2.jpg" style="width: 300px;">
-  <img src="pics/IMG20250510104400~2.jpg" style="width: 300px;">
-  <img src="pics/ss.jpg" style="width: 300px;">
-  <img src="pics/IMG20250928115234.jpg" class="cropped-image">
-  <img src="pics/IMG20250928142004.jpg" class="cropped-image">
-  <img src="pics/IMG20250928152808.jpg" class="cropped-image">
-  <img src="pics/IMG20251002111447.jpg" class="cropped-image">
-  <img src="pics/IMG20251004135406.jpg" class="cropped-image">
-  <img src="pics/IMG20251004164937.jpg" class="cropped-image">
-  <img src="pics/IMG20251004185244.jpg" class="cropped-image">
-  <img src="pics/IMG20250510115305.jpg" class="cropped-image">
-  <img src="pics/IMG20250510115338.jpg" class="cropped-image">
-  <img src="pics/IMG20250510123032.jpg" class="cropped-image">
-  <img src="pics/IMG20250510111239.jpg" class="cropped-image">
-  <img src="pics/IMG20250510111923.jpg" class="cropped-image">
-  <img src="pics/IMG20250510112025.jpg" class="cropped-image">
-  <img src="pics/IMG20250510115603.jpg" class="cropped-image">
-  <img src="pics/IMG20250510115625.jpg" class="cropped-image">
-  <img src="pics/IMG20250820012058.jpg" class="cropped-image">
-  <img src="pics/IMG20250830123445.jpg" class="cropped-image">
-  <img src="pics/IMG20250831125814.jpg" class="cropped-image">
-  <img src="pics/IMG20250831224556.jpg" class="cropped-image">
-  <img src="pics/raspi-cluster.jpg" class="cropped-image">
-  <img src="pics/IMG_4516.jpg" class="cropped-image">
-  <img src="pics/IMG_1436.JPG" class="cropped-image">
-  <img src="pics/PXL_20221126_164702885.jpg" class="cropped-image">
-  <img src="pics/IMG20241014113905.jpg" class="cropped-image">
-  <img src="pics/IMG20241018143111.jpg" class="cropped-image"> 
-  <img src="pics/IMG20241128120816.jpg" class="cropped-image">
-  <img src="pics/IMG20250424073154.jpg" class="cropped-image">
-  <img src="pics/IMG20250510100621.jpg" class="cropped-image">
-  <img src="pics/IMG20250910164326.jpg" class="cropped-image">
-  <img src="pics/IMG20250913105828.jpg" class="cropped-image">
-  <img src="pics/IMG20250913133023.jpg" class="cropped-image">
-  <img src="pics/IMG20250917230706.jpg" class="cropped-image">
-  <img src="pics/IMG202412010910502.jpg" class="cropped-image">
-  <img src="pics/PXL_20221126_200123852.jpg" class="cropped-image">
+  <div id="gallery">
+  <img src="pics/IMG20251009193919.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20251009225856.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20251011100910.jpg" class="cropped-image gallery-item">
+  <img src="pics/20251012_123944.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20251011101133.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20251011110815.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20251013192521.jpg" class="cropped-image gallery-item">
+  <img src="pics/train.jpeg" class="cropped-image gallery-item">
+  <img src="pics/thinkpad.png" class="cropped-image gallery-item">
+  <img src="pics/IMG_20240914_012453.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20240825213858.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20240911235820.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20241011185242.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20241012124905.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20241128225213~2.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250131174619.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20251004185244.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250510115305.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250510115338.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG_20241129_203339.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250220221902.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250406000129.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250415001102.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250502172424.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250502204301.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250118012503.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250510104051~2.jpg" style="width: 300px;" class="cropped-image gallery-item">
+  <img src="pics/IMG20250510104412~2.jpg" style="width: 300px;"class="cropped-image gallery-item">
+  <img src="pics/IMG20250510104400~2.jpg" style="width: 300px;"class="cropped-image gallery-item">
+  <img src="pics/ss.jpg" style="width: 300px;" class="cropped-image gallery-item">
+  <img src="pics/IMG20250928115234.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250928142004.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250928152808.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20251002111447.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20251004135406.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20251004164937.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250510123032.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250510111239.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250510111923.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250510112025.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250510115603.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250510115625.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250820012058.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250830123445.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250831125814.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250831224556.jpg" class="cropped-image gallery-item">
+  <img src="pics/raspi-cluster.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG_4516.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG_1436.JPG" class="cropped-image gallery-item">
+  <img src="pics/PXL_20221126_164702885.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20241014113905.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20241018143111.jpg" class="cropped-image gallery-item"> 
+  <img src="pics/IMG20241128120816.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250424073154.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250510100621.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250910164326.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250913105828.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250913133023.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG20250917230706.jpg" class="cropped-image gallery-item">
+  <img src="pics/IMG202412010910502.jpg" class="cropped-image gallery-item">
+  <img src="pics/PXL_20221126_200123852.jpg" class="cropped-image gallery-item">
+  </div>
 
-</div>
+  <div id="pagination-controls"></div>
+
+  <script>
+    const itemsPerPage = 12; // number of images per page
+    let currentPage = 1;
+
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const totalPages = Math.ceil(galleryItems.length / itemsPerPage);
+    const paginationControls = document.getElementById('pagination-controls');
+
+    function showPage(page) {
+      const start = (page - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+
+      galleryItems.forEach((item, index) => {
+        item.style.display = (index >= start && index < end) ? 'block' : 'none';
+      });
+
+      currentPage = page;
+      renderPagination();
+    }
+
+    function renderPagination() {
+      paginationControls.innerHTML = '';
+
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        if (i === currentPage) btn.classList.add('active');
+        btn.addEventListener('click', () => showPage(i));
+        paginationControls.appendChild(btn);
+      }
+    }
+
+    // Initialize the first page
+    showPage(currentPage);
+  </script>
 </body>
 </html>
-
