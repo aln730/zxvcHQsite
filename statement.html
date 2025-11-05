@@ -34,5 +34,66 @@
 <body>
   <h1><a href="https://zxcvhq.dev/">> Home</a></h1>
   <img src="rickroll-roll.gif" style="width:900px;height:900px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+  <img src="67.webp" style="width:100px;height:100px;">
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  const imgs = document.querySelectorAll("img");
+
+  imgs.forEach(img => {
+    img.style.position = "absolute";
+    img.style.width = img.width + "px"; // lock current size
+    img.style.height = img.height + "px";
+
+    // Random starting position and velocity
+    let x = Math.random() * (window.innerWidth - img.width);
+    let y = Math.random() * (window.innerHeight - img.height);
+    let dx = (Math.random() * 2 + 1) * (Math.random() < 0.5 ? -1 : 1);
+    let dy = (Math.random() * 2 + 1) * (Math.random() < 0.5 ? -1 : 1);
+
+    function move() {
+      x += dx;
+      y += dy;
+
+      if (x <= 0 || x + img.width >= window.innerWidth) dx *= -1;
+      if (y <= 0 || y + img.height >= window.innerHeight) dy *= -1;
+
+      img.style.left = x + "px";
+      img.style.top = y + "px";
+
+      requestAnimationFrame(move);
+    }
+
+    move();
+  });
+});
+
+
+  </script>
+</script>
 </body>
 </html>
