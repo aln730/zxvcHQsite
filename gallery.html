@@ -7,68 +7,108 @@
   <link rel="stylesheet" href="blog.css">
 
   <style>
+    :root {
+      --accent: #5eff00;
+      --bg: #000;
+      --text: #eaeaea;
+    }
+
     body {
-      text-align: center;
       margin: 0;
-      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: monospace;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 20px 0;
+      font-size: 1.2rem;
     }
 
     h1 a {
       text-decoration: none;
-      color: rgb(0, 255, 21);
+      color: var(--accent);
     }
 
+    /* Gallery */
     #gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 5px;
-      margin: 20px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      padding: 20px;
+      max-width: 1400px;
+      margin: auto;
     }
 
-    .cropped-image.gallery-item {
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
+    .gallery-item {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
+    .gallery-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    }
 
-    /* Hide gallery on small/mobile screens */
+    /* Pagination */
+    #pagination-controls {
+      margin: 20px;
+    }
+
+    #pagination-controls button {
+      background: var(--accent);
+      border: none;
+      padding: 8px 12px;
+      margin: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    #pagination-controls button.active {
+      background: #222;
+      color: white;
+    }
+
+    /* Lightbox */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    #lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 6px;
+    }
+
+    #lightbox:active {
+      cursor: zoom-out;
+    }
+
     @media (max-width: 768px) {
       #gallery, #pagination-controls {
         display: none;
       }
     }
-
-    #pagination-controls {
-      margin: 20px 0;
-    }
-
-    #pagination-controls button {
-      padding: 6px 12px;
-      margin: 0 3px;
-      font-size: 16px;
-      cursor: pointer;
-      border: 1px solid #333;
-      background-color: #5eff00;
-      border-radius: 4px;
-      transition: background-color 0.2s;
-    }
-
-    #pagination-controls button:hover {
-      background-color: #ffffff;
-    }
-
-    #pagination-controls button.active {
-      background-color: #333;
-      color: #fff;
-    }
   </style>
 </head>
+
 <body>
-  <h1><a href="https://zxcvhq.dev/">>Home<</a> Gallery (In Progress, S3 soon; Uncompressed Images take time to load!)</h1>
+  <h1>
+    <a href="https://zxcvhq.dev/">>Home<</a>
+    Gallery — raw, uncompressed, S3 soon
+  </h1>
 
   <div id="gallery">
   <img src="pics/IMG20251009193919.jpg" class="cropped-image gallery-item">
@@ -136,40 +176,72 @@
 
   <div id="pagination-controls"></div>
 
+  <div id="lightbox">
+    <img src="" alt="">
+  </div>
+
   <script>
-    const itemsPerPage = 12; // number of images per page
+    const itemsPerPage = 12;
     let currentPage = 1;
 
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const totalPages = Math.ceil(galleryItems.length / itemsPerPage);
-    const paginationControls = document.getElementById('pagination-controls');
+    const items = [...document.querySelectorAll('.gallery-item')];
+    const totalPages = Math.ceil(items.length / itemsPerPage);
+    const controls = document.getElementById('pagination-controls');
 
     function showPage(page) {
-      const start = (page - 1) * itemsPerPage;
-      const end = start + itemsPerPage;
-
-      galleryItems.forEach((item, index) => {
-        item.style.display = (index >= start && index < end) ? 'block' : 'none';
-      });
-
       currentPage = page;
-      renderPagination();
+      items.forEach((img, i) => {
+        img.style.display =
+          i >= (page - 1) * itemsPerPage && i < page * itemsPerPage
+            ? 'block'
+            : 'none';
+      });
+      renderControls();
     }
 
-    function renderPagination() {
-      paginationControls.innerHTML = '';
+    function renderControls() {
+      controls.innerHTML = '';
+
+      const prev = document.createElement('button');
+      prev.textContent = '←';
+      prev.onclick = () => showPage(Math.max(1, currentPage - 1));
+      controls.appendChild(prev);
 
       for (let i = 1; i <= totalPages; i++) {
-        const btn = document.createElement('button');
-        btn.textContent = i;
-        if (i === currentPage) btn.classList.add('active');
-        btn.addEventListener('click', () => showPage(i));
-        paginationControls.appendChild(btn);
+        const b = document.createElement('button');
+        b.textContent = i;
+        if (i === currentPage) b.classList.add('active');
+        b.onclick = () => showPage(i);
+        controls.appendChild(b);
       }
+
+      const next = document.createElement('button');
+      next.textContent = '→';
+      next.onclick = () => showPage(Math.min(totalPages, currentPage + 1));
+      controls.appendChild(next);
     }
 
-    // Initialize the first page
-    showPage(currentPage);
+    showPage(1);
+
+    /* Lightbox */
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+
+    items.forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    lightbox.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+      lightboxImg.src = '';
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') lightbox.style.display = 'none';
+    });
   </script>
 </body>
 </html>

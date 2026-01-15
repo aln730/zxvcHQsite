@@ -1,185 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8" />
+    <title>Blog2</title>
     <link rel="icon" href="rover_read.gif" type="image/png" />
-  <meta charset="UTF-8" />
-  <title>Blog2</title>
-<link rel="stylesheet" href="blog.css">
+    <link rel="stylesheet" href="blog.css">
 </head>
 <body>
-<h1><a href="https://zxcvhq.dev/">>Home</a></h1>
+    <h1><a href="https://zxcvhq.dev/">>Home</a></h1>
 
-<h1>3 AM LAN Party (DRAFT)</h1>
+    <h1>3 AM LAN Party (DRAFT)</h1>
 
-<pre>
-How to Play Multiplayer Quake
+    <pre>
+Quake 1 setup
 
-This document provides a technical guide for setting up and playing multiplayer Quake, including both NetQuake and QuakeWorld.
+(Adapted from these slides and quake.csh.rit.edu)
 
----
+Quake 1 is a pretty old game, so you're not going to be able to pop the CD from 1996 into your PC and start playing. 
+You're going to want a source port, a fork of the game's open-source codebase.
 
-1. Select the Appropriate Quake Engine
+For single-player, I recommend Ironwail, a modern, high-performance port. You might not think having a "high-performance" source port is important, 
+but modern Quake maps get really detailed; Ironwail can play the most complex maps available and still get high framerates on weaker hardware.
 
-    | Version        | Protocol    | Description                                                       |
-    |----------------|-------------|-------------------------------------------------------------------|
-    | **NetQuake**   | Original    | Vanilla networking; suitable for LAN or nostalgia.                |
-    | **QuakeWorld** | Optimized   | Online-optimized with prediction, ping correction, and community  |
-    |                |             | servers.                                                          |
+Additionally, if you have Quake downloaded from Steam, Ironwail will work out of the box! Just download, extract, and play.
 
-    Recommended Clients
+Methods to install Ironwail:
 
-    - NetQuake: `QuakeSpasm`, `vkQuake`, `DarkPlaces`
-    - QuakeWorld: `ezQuake`, `nQuake`, `FodQuake`
+- On Windows: download the latest release (labeled "WINDOWS 64-BIT") from Ironwail's GitHub page.
+- On Linux: install from your package manager (Arch: AUR, NixOS: nixpkgs, OpenSUSE: packaged). Otherwise, download from GitHub and extract 
+  to ~/.local/share, /usr/local/share, or /opt.
 
----
+Alternatives to Ironwail:
 
-2. Acquire Game Data
+If your system doesn't support OpenGL 4.3 (old hardware, Mac, etc.), use QSS-M. Though multiplayer-focused, it works fine for singleplayer.
 
-    You need the original Quake data files:
+Multiplayer:
 
-    - `pak0.pak` (required, from shareware or full version)
-    - `pak1.pak` (optional, from full version)
+Quake 1 had two network protocols:
 
-    Place these in the `id1/` directory inside your client directory:
-    quake/
-    ├── ezquake.exe
-    └── id1/
-    ├── pak0.pak
-    └── pak1.pak
+- NetQuake: works best at low latencies.
+- QuakeWorld: improved long-distance protocol, slightly different physics.
 
----
+Protocol-specific ports:
 
-3. Running the Client
+NetQuake → QSS-M
+- Best NetQuake source port.
+- Install required libraries: libopusfile, libmad.
+- Example (Arch Linux): sudo pacman -S opusfile libmad
+- Optional: nQSS-M on Windows.
 
-    NetQuake Example (QuakeSpasm):
-    ./quakespasm -game id1
+QuakeWorld → ezQuake
+- Only QuakeWorld port worth using today.
+- Download for Windows/Mac, or use Flatpak/website for Linux.
+- nQuake available for quick online setup.
 
----
+Getting the game files:
 
+- Skip if using Ironwail (autodetects Steam files).
+- Need folders: id1, hipnotic, rogue
+- Copy additional folders: rerelease/dopa, rerelease/mg1
+- Copy music:
+    - rerelease/id1/music → port/id1
+    - rerelease/hipnotic/music → port/id1
+    - rerelease/rogue/music → port/rogue
 
-4. Joining a Multiplayer Game
+Recommended settings (QSS-M):
 
-    a. Public Servers, QuakeWorld (recommended)
+- Enable fullscreen (Options > Display > Video Mode + Display Mode)
+- Increase menu scale
+- Increase HUD scale
+- Disable blurry textures
+- Enable crosshair
+- Set your name
 
-        1. Launch ezQuake
+Connecting to Quake @ CSH:
 
-        2. Press ESC → Multiplayer → Server Browser
+- Multiplayer > Join Game > TCP/IP > quake.csh.rit.edu
+- Or use console: `connect quake.csh.rit.edu`
+- Bookmark servers in QSS-M
 
-        3. Select and join a server
+Quake Live setup:
 
-    Manual (CLI):
+- Buy and install from Steam
+- Open the game and play!
+    </pre>
 
-        /connect <ip>:<port>, example: /connect qw.foppa.dk:28501
-
-
-
-    b. Direct IP / LAN Connect
-
-    If another player is hosting:
-
-    /connect <host_ip>:<port>
-
-    Default ports:
-
-        NetQuake: 26000
-
-        QuakeWorld: 27500
----
-
-
-5. Hosting a Server
-
-    a. Dedicated Server; NetQuake:
-
-
-    ./quake -dedicated 1 +map start
-
-    QuakeWorld:
-
-    ./qwsv +map dm6
-
-    Make sure to port-forward appropriately.
-
-
-    b. LAN Hosting (non-dedicated)
-
-    From a Quake client:
-
-    /map e1m1
-
-    Other players join via:
-
-    /connect <host_ip>
----
-
-
-6. Game Modes
-
-    Mode	Command-line Parameters
-
-    Deathmatch	+deathmatch 1
-    Team Deathmatch	+deathmatch 1 +teamplay 1
-    Cooperative	+coop 1 +deathmatch 0
-    Capture the Flag	Requires additional mods and maps
----
-
-
-7. Configuration
-
-    autoexec.cfg (QuakeWorld Example)
-
-    Create in qw/autoexec.cfg:
-
-    name "PlayerName"
-    rate 25000
-    cl_maxfps 72
-    +mlook
-
-    Server Variables (in console or config):
-
-    fraglimit 30
-    timelimit 10
-    hostname "Quake Server"
----
-
-8. Resources
-
-    QuakeWorld Server List: https://www.quakeworld.nu/play
-
-    QuakeWorld Installer (nQuake): https://nquake.com/
-
-    QuakeSpasm (NetQuake client): https://sourceforge.net/projects/quake/
----
-
-
-9. Notes
-
-    QuakeWorld is recommended for Internet play due to latency compensation.
-
-    NetQuake offers more accurate vanilla gameplay and is ideal for local or co-op games.
-
-    VPNs like ZeroTier or Tailscale can be used to simulate LAN over the Internet.
-
-    Optional: Firewall/Port Forwarding
-
-        NetQuake Default Port: 26000
-
-        QuakeWorld Default Port: 27500
-
-    Ensure these are open or forwarded on your router/firewall when hosting.
-</pre>
-
-<!-- Blog Section (Top Right Corner) -->
-<div id="blog-section">
-<h1>POSTS</h1>
-  <ul>
-        <li><a href="blog1.html">>Borg and Kubernetes</a></li>
-        <li><a href="blog2.html">>LAN Party at 3 AM</a></li>
-        <li><a href="blog3.html">>Brandreth and Fall Camping</a></li>
-        <li><a href="blog4.html">>Climbing is fun</a></li>
-        <li><a href="blog5.html">>TBA</a></li>
-  </ul>
-</div>
-
+    <!-- Blog Section (Top Right Corner) -->
+    <div id="blog-section">
+        <h1>POSTS</h1>
+        <ul>
+            <li><a href="blog1.html">>Borg and Kubernetes</a></li>
+            <li><a href="blog2.html">>LAN Party at 3 AM</a></li>
+            <li><a href="blog3.html">>Brandreth and Fall Camping</a></li>
+            <li><a href="blog4.html">>Climbing is fun</a></li>
+            <li><a href="blog5.html">>TBA</a></li>
+        </ul>
+    </div>
 </body>
 </html>
